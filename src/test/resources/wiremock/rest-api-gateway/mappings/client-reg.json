@@ -1,0 +1,29 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/client/register"
+      },
+      "response": {
+        "delayDistribution": {
+          "type": "lognormal",
+          "median": 90,
+          "sigma": 0.1
+        },
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "status": "success",
+          "actualTimestamp": 1607449018829,
+          "data": {
+            "createTime": 1600443296227,
+            "operationId": "777"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+image: gradle:jdk17
+
+stages:
+  - test
+
+test:
+  stage: test
+  script:
+    - ./gradlew test

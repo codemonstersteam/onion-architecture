@@ -1,0 +1,94 @@
+spring:
+  application:
+    name: mq-rest-sync-adapter
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    default-property-inclusion: non_null
+  messages:
+    basename: i18n/messages
+  jms:
+    template:
+      receive-timeout: 5s
+      time-to-live: 5s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics
+  metrics:
+    export:
+      atlas:
+        enabled: false
+
+logging:
+  level:
+    org.springframework: INFO
+    org.springframework.jms: DEBUG
+    team.codemonsters: DEBUG
+
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 1024
+  servlet:
+    context-path: /${spring.application.name}
+
+webclient:
+  connect-timeout-mills: 10000
+  read-timeout-mills: 30500
+  write-timeout-mills: 20000
+  keep-alive:
+    enabled: true
+  logging:
+    enabled: true
+
+# конфигураця подключения к брокеру IBM MQ
+ibm:
+  mq:
+    queueManager: QM1
+    channel: DEV.ADMIN.SVRCONN
+    connName: localhost(1414)
+    user: admin
+    password: passw0rd
+
+mq:
+  configs:
+    ps:
+      REQ: IN.QUEUE.PS
+      RES: OUT.QUEUE.PS
+      RECEIPT: RECEIPT.QUEUE.PS
+      correlationID: "CorrelationID"
+      createDateTime: "X_CreateDateTime"
+      formatCreateDateTime: "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+    middleware:
+      REQ: IN.QUEUE.MID
+      RES: OUT.QUEUE.MID
+      RECEIPT: RECEIPT.QUEUE.MID
+      correlationID: "CorrelationID"
+      createDateTime: "X_CreateDateTime"
+      formatCreateDateTime: "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+
+#REST configuration
+rest:
+  configs:
+    api-gateway:
+      url: http://localhost:8080
+      basic-auth:
+        user: admin
+        password: password
+      operations:
+        client-reg: /api/client/register
+        client-wallet-balance: /api/client/${Api-clientId}/wallet/balance
+        client-wallet-status: /api/client/${Api-clientId}/wallet/status
+
+features:
+    toggles:
+      wallet-balance-workflow:
+        enabled: false
+        description: "Включает переработанный код бизнес-процесса получения баланса кошелька"

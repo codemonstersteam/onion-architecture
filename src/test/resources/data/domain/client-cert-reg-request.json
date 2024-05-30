@@ -1,0 +1,11 @@
+{
+
+  "correlationId": "c12048e8-ccdc-445e-99a2-198f898dda24",
+  "method": "POST",
+  "service": "api-gateway",
+  "operation": "client-cert-reg",
+  "headers": {
+    "Api-clientId": "aaa-bbb"
+  },
+  "body": ""
+}

@@ -1,0 +1,17 @@
+logging:
+  level:
+    org.springframework: INFO
+    org.springframework.jms: DEBUG
+    team.codemonsters: DEBUG
+
+features:
+  toggles:
+    test-feature:
+      enabled: true
+      description: "Включает тестовую фичу"
+    test-feature-disabled:
+      enabled: false
+      description: "Включает тестовую фичу"
+    wallet-balance-workflow:
+      enabled: false
+      description: "Включает переработанный код бизнес-процесса получения баланса кошелька"
